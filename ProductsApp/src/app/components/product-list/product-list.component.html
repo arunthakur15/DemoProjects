@@ -1,0 +1,41 @@
+<div class="container">
+  <div>
+    <input type="text" [formControl]="typeahead" placeholder="Search for products !" (input)="suggest()">
+    <div class="suggestions" *ngIf="suggestions.length">
+      <p *ngFor="let s of suggestions" (click)="searchProduct(s._id)"><span >{{s.name}}</span></p>
+    </div>
+  </div>
+  <!-- No data message -->
+  <p *ngIf="Product.length <= 0" class="no-data text-center">There is no product added yet!</p>
+
+  <!-- Product list -->
+  <table class="table table-bordered" *ngIf="Product.length > 0">
+    <thead class="table-success">
+      <tr>
+        <th scope="col">Product ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col center">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of Product; let i = index">
+        <th scope="row">{{product._id}}</th>
+        <td>{{product.name}}</td>
+        <td>{{product.cost}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.price}}</td>
+        <td class="text-center edit-block">
+          <span class="edit" [routerLink]="['/edit-product/', product._id]">
+            <button type="button" class="btn btn-success btn-sm">Edit</button>
+          </span>
+          <span class="delete" (click)="removeProduct(product, i)">
+            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
