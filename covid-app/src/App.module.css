@@ -1,0 +1,8 @@
+body{
+    background-color: #ccc;
+}
+
+.container{
+    align-items: center;
+    justify-content: center;
+}
